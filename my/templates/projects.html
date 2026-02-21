@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="projects">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid">
+            {% for project in data.projects %}
+            <div class="card">
+                <h3>{{ project.name }}</h3>
+                <p><strong>Tech Stack:</strong> {{ project.tech_stack }}</p>
+                <p>{{ project.description }}</p>
+                <ul>
+                    {% for achievement in project.achievements %}
+                    <li><i class="fas fa-check-circle"></i> {{ achievement }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <a href="{{ project.link }}" class="btn-secondary" target="_blank"><i class="fab fa-github"></i> View
+                    Code</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

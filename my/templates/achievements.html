@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="achievements">
+    <div class="container">
+        <h2 class="section-title">Achievements</h2>
+        <div class="grid">
+            {% for achievement in data.achievements %}
+            <div class="card">
+                <h3><i class="{{ achievement.icon }}" style="color: {{ achievement.icon_color }};"></i> {{
+                    achievement.title }}</h3>
+                <p><strong>Organizers:</strong> {{ achievement.organizer }}</p>
+                <p>{{ achievement.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

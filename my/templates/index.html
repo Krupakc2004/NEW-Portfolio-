@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container hero-content">
+        <div class="profile-img-container">
+            <img src="{{ url_for('static', filename='images/pic.jpeg') }}" alt="{{ data.name }}" class="profile-img">
+        </div>
+        <h1>Hi, I'm {{ data.name }}</h1>
+        <p>{{ data.role }}</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn-primary">View Projects</a>
+            <a href="#contact" class="btn-secondary">Contact Me</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="container">
+        <h2 class="section-title">{{ data.about.title }}</h2>
+        <div class="about-content">
+            <p>{{ data.about.description }}</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{{ url_for('about') }}" class="btn-text">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="skills section-bg">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="grid">
+            {% for category, items in data.skills.items() %}
+            <div class="card skill-category">
+                <h3>
+                    {% if category == 'Cloud (AWS)' %}<i class="fas fa-cloud"></i>
+                    {% elif category == 'Programming' %}<i class="fas fa-code"></i>
+                    {% elif category == 'Tools' %}<i class="fas fa-tools"></i>
+                    {% elif category == 'Concepts' %}<i class="fas fa-brain"></i>
+                    {% endif %}
+                    {{ category }}
+                </h3>
+                <div class="skill-tags">
+                    {% for item in items %}
+                    <span class="tag">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('skills') }}" class="btn-secondary">View All Skills</a>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="projects">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="grid">
+            {% for project in data.projects[:3] %}
+            <div class="card">
+                <h3>{{ project.name }}</h3>
+                <p><strong>Tech Stack:</strong> {{ project.tech_stack }}</p>
+                <p>{{ project.description }}</p>
+                <ul>
+                    {% for achievement in project.achievements %}
+                    <li><i class="fas fa-check-circle"></i> {{ achievement }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <a href="{{ project.link }}" class="btn-secondary" target="_blank"><i class="fab fa-github"></i> View
+                    Code</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('projects') }}" class="btn-primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="experience section-bg">
+    <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            {% for job in data.experience %}
+            <div class="card">
+                <h3>{{ job.role }}</h3>
+                <h4>{{ job.company }}</h4>
+                <p class="text-light">{{ job.period }}</p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                <ul>
+                    {% for item in job.description %}
+                    <li><i class="fas fa-angle-right"></i> {{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('experience') }}" class="btn-secondary">View Full Experience</a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info card">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:{{ data.contact.email }}">{{ data.contact.email
+                        }}</a></p>
+                <p><i class="fab fa-linkedin"></i> <a href="{{ data.contact.linkedin }}" target="_blank">LinkedIn</a>
+                </p>
+                <p><i class="fab fa-github"></i> <a href="{{ data.contact.github }}" target="_blank">GitHub</a></p>
+            </div>
+
+            <div class="contact-form card">
+                <form action="{{ url_for('contact') }}" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" class="form-control" placeholder="Your Message"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

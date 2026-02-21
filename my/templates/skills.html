@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="skills">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+
+        <div class="grid">
+            {% for category, items in data.skills.items() %}
+            <div class="card skill-category">
+                <h3>
+                    {% if category == 'Cloud (AWS)' %}<i class="fas fa-cloud"></i>
+                    {% elif category == 'Programming' %}<i class="fas fa-code"></i>
+                    {% elif category == 'Tools' %}<i class="fas fa-tools"></i>
+                    {% elif category == 'Concepts' %}<i class="fas fa-brain"></i>
+                    {% endif %}
+                    {{ category }}
+                </h3>
+                <div class="skill-tags">
+                    {% for item in items %}
+                    <span class="tag">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

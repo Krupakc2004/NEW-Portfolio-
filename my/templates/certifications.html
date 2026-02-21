@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="certifications">
+    <div class="container">
+        <h2 class="section-title">Certifications</h2>
+        <div class="grid">
+            {% for cert in data.certifications %}
+            <div class="card">
+                <h3>{{ cert.name }}</h3>
+                <p>{{ cert.issuer }}</p>
+                <i class="{{ cert.icon }} fa-2x" style="color: var(--primary-color);"></i>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
